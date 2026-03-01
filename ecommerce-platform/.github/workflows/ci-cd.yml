@@ -1,0 +1,130 @@
+﻿name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  frontend-test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci
+      
+      - name: Run linter
+        working-directory: ./frontend
+        run: npm run lint
+      
+      - name: Run tests
+        working-directory: ./frontend
+        run: npm test -- --coverage
+      
+      - name: Build
+        working-directory: ./frontend
+        run: npm run build
+  
+  backend-test:
+    name: Backend Tests (User Service)
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: test_db
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+      
+      - name: Build and Test User Service
+        working-directory: ./backend/user-service
+        run: |
+          mvn clean verify
+          mvn test
+  
+  python-test:
+    name: Python AI Service Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        working-directory: ./backend/recommendation-service
+        run: |
+          pip install -r requirements-lite.txt
+          pip install pytest pytest-cov
+      
+      - name: Run tests
+        working-directory: ./backend/recommendation-service
+        run: pytest --cov=.
+  
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: [frontend-test, backend-test, python-test]
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Build Frontend Image
+        working-directory: ./frontend
+        run: docker build -t ecommerce-frontend:latest .
+      
+      - name: Build Backend Images
+        run: |
+          docker build -t ecommerce-user-service:latest ./backend/user-service
+          docker build -t ecommerce-ai-service:latest ./backend/recommendation-service
+  
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [docker-build]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy notification
+        run: echo "🚀 Deploying to production..."
+      
+      # Add actual deployment steps here (AWS/Azure/GCP)

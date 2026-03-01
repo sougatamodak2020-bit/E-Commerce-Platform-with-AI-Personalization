@@ -1,0 +1,22 @@
+﻿spring:
+  application:
+    name: product-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce_db
+    username: ecommerce_user
+    password: ecommerce_pass_2024
+  jpa:
+    hibernate:
+      ddl-auto: update
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: redis_pass_2024
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000
+
+server:
+  port: 8082
