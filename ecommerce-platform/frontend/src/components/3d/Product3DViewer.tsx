@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useRef, useState, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
@@ -196,7 +196,7 @@ export const Product3DViewer: React.FC<Product3DViewerProps> = ({
       <div className="absolute bottom-4 left-4 bg-white/10 backdrop-blur-md rounded-xl px-4 py-2 border border-white/20">
         <div className="flex items-center gap-2 text-white">
           <Zap className="w-4 h-4 text-royal-gold" />
-          <span className="text-sm font-medium">360° Interactive View</span>
+          <span className="text-sm font-medium">360Â° Interactive View</span>
         </div>
       </div>
 

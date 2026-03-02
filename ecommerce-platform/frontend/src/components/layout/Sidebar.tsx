@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 // ============================================
 // SIDEBAR COMPONENT (Admin/Dashboard)
@@ -85,7 +85,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ type = 'admin' }) => {
                 animate={{ opacity: 1 }}
                 className="font-display text-lg text-white tracking-wider"
               >
-                MAISON ÉLITE
+                MAISON Ã‰LITE
               </motion.span>
             )}
           </Link>

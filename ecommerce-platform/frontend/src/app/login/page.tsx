@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 // ============================================
 // LOGIN PAGE
@@ -78,7 +78,7 @@ export default function LoginPage() {
               <Sparkles className="w-6 h-6 text-slate-900" />
             </div>
             <span className="font-display text-xl text-slate-900 tracking-wider">
-              MAISON ÉLITE
+              MAISON Ã‰LITE
             </span>
           </Link>
 
@@ -103,7 +103,7 @@ export default function LoginPage() {
               <Input
                 label="Password"
                 type={showPassword ? 'text' : 'password'}
-                placeholder="••••••••"
+                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                 leftIcon={<Lock className="w-5 h-5" />}
                 rightIcon={
                   <button
@@ -208,7 +208,7 @@ export default function LoginPage() {
               Experience Luxury Shopping
             </h2>
             <p className="text-white/70 max-w-md">
-              Join thousands of satisfied customers who trust MAISON ÉLITE
+              Join thousands of satisfied customers who trust MAISON Ã‰LITE
               for their premium shopping needs.
             </p>
           </div>

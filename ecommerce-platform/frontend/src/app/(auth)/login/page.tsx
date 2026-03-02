@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -52,7 +52,7 @@ export default function LoginPage() {
             <Sparkles className="w-7 h-7 text-royal-purple" />
           </div>
           <span className="font-display text-2xl text-white tracking-wider">
-            MAISON ÉLITE
+            MAISON Ã‰LITE
           </span>
         </Link>
 

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 // ============================================
 // FOOTER COMPONENT
@@ -102,7 +102,7 @@ export const Footer: React.FC = () => {
                 <Sparkles className="w-6 h-6 text-slate-900" />
               </div>
               <span className="font-display text-xl text-white tracking-wider">
-                MAISON ÉLITE
+                MAISON Ãƒâ€°LITE
               </span>
             </Link>
             <p className="text-white/60 text-sm mb-6 max-w-xs">
@@ -173,7 +173,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-sm">
-            © 2024 Maison Élite. All rights reserved.
+            Ã‚Â© 2024 Maison Ãƒâ€°lite. All rights reserved.
           </p>
           
           {/* Social Links */}

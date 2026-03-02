@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import {
@@ -42,7 +42,7 @@ export default function SellerDashboard() {
     { label: 'Total Products', value: '24', color: '#2196F3' },
     { label: 'Total Sales', value: '\,456', color: '#4CAF50' },
     { label: 'Pending Orders', value: '8', color: '#FF9800' },
-    { label: 'Reviews', value: '4.8 ⭐', color: '#9C27B0' },
+    { label: 'Reviews', value: '4.8 â­', color: '#9C27B0' },
   ];
 
   return (

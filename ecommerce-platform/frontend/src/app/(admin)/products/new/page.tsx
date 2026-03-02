@@ -107,7 +107,7 @@ export default function ProductUploadPage() {
       const response = await axios.post('/api/products', productData);
 
       if (response.data.success) {
-        toast.success('🎉 Product created and uploaded to Supabase!');
+        toast.success('Ã°Å¸Å½â€° Product created and uploaded to Supabase!');
         router.push('/admin/products');
       }
     } catch (error: any) {
@@ -314,7 +314,7 @@ export default function ProductUploadPage() {
             disabled={uploadingImages}
             className="flex-1"
           >
-            {loading ? 'Creating & Uploading to Supabase...' : '✨ Create Product'}
+            {loading ? 'Creating & Uploading to Supabase...' : 'Ã¢Å“Â¨ Create Product'}
           </Button>
           <Button
             type="button"

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 // ============================================
 // PRODUCT FILTERS COMPONENT
@@ -262,7 +262,7 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
                           i < r ? 'text-amber-400' : 'text-gray-300'
                         )}
                       >
-                        ★
+                        â˜…
                       </span>
                     ))}
                     <span className="text-sm text-gray-500 ml-1">& Up</span>

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 // ============================================
 // CART PAGE
@@ -289,7 +289,7 @@ export default function CartPage() {
 
               {/* Security Notice */}
               <div className="mt-4 text-center text-xs text-gray-500">
-                🔒 Secure checkout powered by Stripe
+                ðŸ”’ Secure checkout powered by Stripe
               </div>
             </div>
           </div>

@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.13.5",
+    "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.13.5",
     "@hookform/resolvers": "^3.9.1",
     "@mui/icons-material": "^6.1.10",
@@ -40,8 +42,8 @@
     "next": "^15.0.4",
     "next-auth": "^4.24.13",
     "openai": "^6.25.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-dropzone": "^15.0.0",
     "react-hook-form": "^7.54.0",
     "react-hot-toast": "^2.6.0",

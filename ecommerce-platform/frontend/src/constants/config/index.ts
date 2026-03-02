@@ -1,9 +1,9 @@
-﻿// ============================================
+// ============================================
 // APP CONFIGURATION
 // ============================================
 
 export const APP_CONFIG = {
-  name: 'MAISON ÉLITE',
+  name: 'MAISON Ã‰LITE',
   description: 'Luxury E-Commerce Platform with AI Personalization',
   url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   api: {
