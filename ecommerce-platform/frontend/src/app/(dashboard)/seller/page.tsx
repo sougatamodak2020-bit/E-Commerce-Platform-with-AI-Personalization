@@ -1,34 +1,33 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Box,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Chip,
-  IconButton,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from '@mui/material';
-import { Add, Edit, Delete, Visibility } from '@mui/icons-material';
-import { motion } from 'framer-motion';
-
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Chip from '@mui/material/Chip';
+import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 export default function SellerDashboard() {
   const [openAddProduct, setOpenAddProduct] = useState(false);
 
@@ -58,7 +57,7 @@ export default function SellerDashboard() {
         </div>
         <Button
           variant=\"contained\"
-          startIcon={<Add />}
+          startIcon={<AddIcon />}
           size=\"large\"
           onClick={() => setOpenAddProduct(true)}
           sx={{
@@ -124,13 +123,13 @@ export default function SellerDashboard() {
                   </TableCell>
                   <TableCell align=\"right\">
                     <IconButton size=\"small\">
-                      <Visibility />
+                      <VisibilityIcon />
                     </IconButton>
                     <IconButton size=\"small\">
-                      <Edit />
+                      <EditIcon />
                     </IconButton>
                     <IconButton size=\"small\" color=\"error\">
-                      <Delete />
+                      <DeleteIcon />
                     </IconButton>
                   </TableCell>
                 </TableRow>

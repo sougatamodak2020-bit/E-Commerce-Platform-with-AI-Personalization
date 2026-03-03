@@ -1,38 +1,30 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Box,
-  Card,
-  CardContent,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Chip,
-  IconButton,
-  Tab,
-  Tabs,
-} from '@mui/material';
-import {
-  TrendingUp,
-  People,
-  ShoppingCart,
-  AttachMoney,
-  Edit,
-  Delete,
-  Visibility,
-} from '@mui/icons-material';
-} from '@mui/material';
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { motion } from 'framer-motion';
-
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Chip from '@mui/material/Chip';
+import IconButton from '@mui/material/IconButton';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import PeopleIcon from '@mui/icons-material/People';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 const salesData = [
   { month: 'Jan', sales: 4000, revenue: 2400 },
   { month: 'Feb', sales: 3000, revenue: 1398 },
@@ -53,10 +45,10 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState(0);
 
   const stats = [
-    { title: 'Total Revenue', value: '\,239', change: '+12.5%', icon: <AttachMoney />, color: '#4CAF50' },
-    { title: 'Total Orders', value: '1,245', change: '+8.2%', icon: <ShoppingCart />, color: '#2196F3' },
-    { title: 'Active Users', value: '8,492', change: '+15.3%', icon: <People />, color: '#FF9800' },
-    { title: 'Conversion Rate', value: '3.24%', change: '+2.1%', icon: <TrendingUp />, color: '#9C27B0' },
+    { title: 'Total Revenue', value: '\,239', change: '+12.5%', icon: <AttachMoneyIcon />, color: '#4CAF50' },
+    { title: 'Total Orders', value: '1,245', change: '+8.2%', icon: <ShoppingCartIcon />, color: '#2196F3' },
+    { title: 'Active Users', value: '8,492', change: '+15.3%', icon: <PeopleIcon />, color: '#FF9800' },
+    { title: 'Conversion Rate', value: '3.24%', change: '+2.1%', icon: <TrendingUpIcon />, color: '#9C27B0' },
   ];
 
   return (
@@ -196,13 +188,13 @@ export default function AdminDashboard() {
                     <TableCell>{order.date}</TableCell>
                     <TableCell align=\"right\">
                       <IconButton size=\"small\">
-                        <Visibility />
+                        <VisibilityIcon />
                       </IconButton>
                       <IconButton size=\"small\">
-                        <Edit />
+                        <EditIcon />
                       </IconButton>
                       <IconButton size=\"small\" color=\"error\">
-                        <Delete />
+                        <DeleteIcon />
                       </IconButton>
                     </TableCell>
                   </TableRow>
