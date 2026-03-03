@@ -25,7 +25,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-salesData = [
+const salesData = [
   { month: 'Jan', sales: 4000, revenue: 2400 },
   { month: 'Feb', sales: 3000, revenue: 1398 },
   { month: 'Mar', sales: 2000, revenue: 9800 },

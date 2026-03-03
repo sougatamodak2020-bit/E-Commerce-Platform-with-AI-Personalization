@@ -28,7 +28,7 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-default function SellerDashboard() {
+export default function SellerDashboard() {
   const [openAddProduct, setOpenAddProduct] = useState(false);
 
   const products = [
