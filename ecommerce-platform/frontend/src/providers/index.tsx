@@ -5,8 +5,8 @@
 // ============================================
 
 import React from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider as MUIThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Toaster } from 'react-hot-toast';
@@ -14,15 +14,6 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 // Create Query Client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60 * 1000, // 1 minute
-      retry: 1,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
 
 // Create MUI Theme
 const theme = createTheme({
@@ -84,6 +75,7 @@ interface ProvidersProps {
 }
 
 export function Providers({ children }: ProvidersProps) {
+  const [queryClient] = React.useState(() => new QueryClient({ defaultOptions: { queries: { staleTime: 60 * 1000, retry: 1, refetchOnWindowFocus: false } } }));
   return (
     <QueryClientProvider client={queryClient}>
       <MUIThemeProvider theme={theme}>

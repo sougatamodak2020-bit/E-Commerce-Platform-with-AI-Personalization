@@ -1,9 +1,11 @@
 'use client';
+import dynamic from 'next/dynamic';
+const Hero3DScene = dynamic(() => import('@/components/3d/Hero3DScene').then(m => ({ default: m.default })), { ssr: false, loading: () => null });
+
 
 import React, { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
@@ -24,10 +26,6 @@ import { ProductCard } from '@/components/products';
 import { Button } from '@/components/ui';
 
 // Dynamically import 3D scene (client-side only)
-const Hero3DScene = dynamic(
-  () => import('@/components/3d/Hero3DScene').then((mod) => mod.Hero3DScene),
-  { ssr: false }
-);
 
 const categories = [
   { 

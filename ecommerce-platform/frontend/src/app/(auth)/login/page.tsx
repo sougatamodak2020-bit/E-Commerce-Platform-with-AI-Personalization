@@ -29,8 +29,14 @@ export default function LoginPage() {
 
       if (response.data.success) {
         login(response.data.data.user, response.data.data.token);
+        // Store refresh token for session renewal
+        if (response.data.data.refresh_token) {
+          localStorage.setItem('refresh_token', response.data.data.refresh_token);
+        }
         toast.success("Welcome back!");
-        router.push("/");
+        const params = new URLSearchParams(window.location.search);
+        const redirect = params.get('redirect') || '/';
+        router.push(redirect);
       }
     } catch (error: any) {
       toast.error(error.response?.data?.error?.message || "Login failed");

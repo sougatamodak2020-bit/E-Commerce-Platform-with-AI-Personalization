@@ -1,46 +1,55 @@
+import { createClient } from '@supabase/supabase-js';
 import { NextRequest, NextResponse } from 'next/server';
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
 export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const { email, password } = body;
+  try {
+    const { email, password } = await request.json();
 
-  if (!email || !password) {
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: 'VALIDATION_ERROR',
-        message: 'Email and password are required',
-        statusCode: 400,
-      },
-    }, { status: 400 });
-  }
+    if (!email || !password) {
+      return NextResponse.json({ success: false, error: { message: 'Email and password required' } }, { status: 400 });
+    }
 
-  if (email === 'demo@example.com' && password === 'password123') {
-    const user = {
-      id: '1',
-      email: 'demo@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      role: 'customer',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-    const token = 'mock-jwt-token-' + Date.now();
+    if (error) {
+      // Specific error messages
+      if (error.message.includes('Email not confirmed')) {
+        return NextResponse.json({ 
+          success: false, 
+          error: { message: 'Please confirm your email first. Check your inbox for a confirmation link.' }
+        }, { status: 401 });
+      }
+      if (error.message.includes('Invalid login credentials')) {
+        return NextResponse.json({ 
+          success: false, 
+          error: { message: 'Invalid email or password. Please try again.' }
+        }, { status: 401 });
+      }
+      return NextResponse.json({ success: false, error: { message: error.message } }, { status: 401 });
+    }
 
     return NextResponse.json({
       success: true,
-      data: { user, token },
+      data: {
+        user: {
+          id: data.user.id,
+          email: data.user.email,
+          full_name: data.user.user_metadata?.full_name || '',
+          avatar_url: data.user.user_metadata?.avatar_url || '',
+          role: data.user.user_metadata?.role || 'customer',
+        },
+        token: data.session.access_token,
+        refresh_token: data.session.refresh_token,
+        expires_at: data.session.expires_at,
+      },
       message: 'Login successful',
     });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: { message: error.message } }, { status: 500 });
   }
-
-  return NextResponse.json({
-    success: false,
-    error: {
-      code: 'AUTH_ERROR',
-      message: 'Invalid email or password',
-      statusCode: 401,
-    },
-  }, { status: 401 });
 }

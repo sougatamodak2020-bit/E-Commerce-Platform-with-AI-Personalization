@@ -11,6 +11,7 @@ import { Button, Input } from '@/components/ui';
 import { registerSchema, getPasswordStrength } from '@/utils/validators';
 import { useAuthStore } from '@/store';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 type RegisterForm = {
   firstName: string;
@@ -40,25 +41,32 @@ export default function RegisterPage() {
 
   const onSubmit = async (data: RegisterForm) => {
     setIsLoading(true);
-    
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      const mockUser = {
-        id: '1',
+      const response = await axios.post('/api/auth/register', {
         email: data.email,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        role: 'customer' as const,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      
-      login(mockUser, 'mock-token');
-      toast.success('Account created successfully!');
-      router.push('/');
-    } catch (error) {
-      toast.error('Registration failed. Please try again.');
+        password: data.password,
+        full_name: data.firstName + ' ' + data.lastName,
+      });
+      if (response.data.success) {
+        if (response.data.data?.token) {
+          login({
+            id: response.data.data.user.id,
+            email: response.data.data.user.email,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            role: 'customer',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          }, response.data.data.token);
+          toast.success('Account created! Welcome!');
+          router.push('/');
+        } else {
+          toast.success('Account created! Please check your email to confirm.');
+          router.push('/login');
+        }
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.error?.message || 'Registration failed');
     } finally {
       setIsLoading(false);
     }
@@ -162,6 +170,7 @@ export default function RegisterPage() {
                 error={errors.password?.message}
                 {...register('password')}
               />
+              <p className="text-xs text-gray-400 mt-1">Must be 8+ chars with uppercase, lowercase, number & special character (!@#$...)</p>
               {password && (
                 <div className="mt-2">
                   <div className="flex items-center gap-2 mb-1">

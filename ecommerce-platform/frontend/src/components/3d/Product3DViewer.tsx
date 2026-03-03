@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+// R3F_DISABLED: import { Canvas, useFrame } from '@react-three/fiber';
 import { 
   OrbitControls, 
   PerspectiveCamera, 
@@ -15,7 +15,7 @@ import {
 } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import { Maximize2, RotateCw, Zap } from 'lucide-react';
-import * as THREE from 'three';
+// R3F_DISABLED: import * as THREE from 'three';
 
 interface Product3DViewerProps {
   productName: string;

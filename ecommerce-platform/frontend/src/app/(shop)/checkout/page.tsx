@@ -10,6 +10,7 @@ import { useCartStore, useAuthStore } from "@/store";
 import { formatCurrency } from "@/utils/formatters";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { supabaseClient } from "@/lib/supabase-client";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -45,8 +46,17 @@ export default function CheckoutPage() {
     setLoading(true);
 
     try {
+      // Get auth token from supabase client
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      console.log('[Checkout] Session:', session?.user?.id ?? 'NONE');
+
+      if (!session) {
+        toast.error("Please login to place an order");
+        router.push("/login?redirect=/checkout");
+        return;
+      }
+
       const orderData = {
-        userId: user?.id || null,
         items,
         subtotal: useCartStore.getState().getSubtotal(),
         tax: useCartStore.getState().getTax(),
@@ -58,7 +68,12 @@ export default function CheckoutPage() {
         paymentMethod,
       };
 
-      const response = await axios.post("/api/orders", orderData);
+      const response = await axios.post("/api/orders", orderData, {
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (response.data.success) {
         clearCart();
