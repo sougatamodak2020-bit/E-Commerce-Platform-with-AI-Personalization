@@ -29,6 +29,7 @@ import {
   Delete,
   Visibility,
 } from '@mui/icons-material';
+} from '@mui/material';
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { motion } from 'framer-motion';
 
