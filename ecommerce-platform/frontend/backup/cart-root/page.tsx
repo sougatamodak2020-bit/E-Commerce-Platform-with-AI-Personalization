@@ -7,10 +7,10 @@ import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, ArrowLeft, Sparkles } fro
 import toast from 'react-hot-toast';
 
 export default function CartPage() {
-  const { items, removeFromCart, updateQuantity, getTotal, clearCart } = useCartStore();
+  const { items, removeItem, updateQuantity, getTotal, clearCart } = useCartStore();
 
   const handleRemove = (itemId: string, name: string) => {
-    removeFromCart(itemId);
+    removeItem(itemId);
     toast.success(`${name} removed from cart`);
   };
 
