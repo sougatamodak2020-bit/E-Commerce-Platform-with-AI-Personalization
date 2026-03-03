@@ -35,7 +35,7 @@ export const cartApi = {
   /**
    * Remove item from cart
    */
-  removeFromCart: async (itemId: string): Promise<ApiResponse<Cart>> => {
+  removeItem: async (itemId: string): Promise<ApiResponse<Cart>> => {
     return apiClient.delete<Cart>(`/cart/items/${itemId}`);
   },
 

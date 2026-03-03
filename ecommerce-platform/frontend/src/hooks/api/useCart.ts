@@ -40,8 +40,8 @@ export const useCart = () => {
     },
   });
 
-  const removeFromCartMutation = useMutation({
-    mutationFn: (itemId: string) => cartApi.removeFromCart(itemId),
+  const removeItemMutation = useMutation({
+    mutationFn: (itemId: string) => cartApi.removeItem(itemId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });
       toast.success('Removed from cart');
@@ -79,7 +79,7 @@ export const useCart = () => {
     isLoading,
     addToCart: addToCartMutation.mutate,
     updateQuantity: updateQuantityMutation.mutate,
-    removeFromCart: removeFromCartMutation.mutate,
+    removeItem: removeItemMutation.mutate,
     clearCart: clearCartMutation.mutate,
     applyCoupon: applyCouponMutation.mutate,
     isAdding: addToCartMutation.isPending,
