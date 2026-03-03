@@ -24,8 +24,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-const salesData = [
+
+salesData = [
   { month: 'Jan', sales: 4000, revenue: 2400 },
   { month: 'Feb', sales: 3000, revenue: 1398 },
   { month: 'Mar', sales: 2000, revenue: 9800 },
