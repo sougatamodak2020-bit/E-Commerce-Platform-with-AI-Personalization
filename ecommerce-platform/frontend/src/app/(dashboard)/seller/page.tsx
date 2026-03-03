@@ -45,20 +45,20 @@ export default function SellerDashboard() {
   ];
 
   return (
-    <Container maxWidth=\"xl\" sx={{ py: 4 }}>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
         <div>
-          <Typography variant=\"h3\" fontWeight={700}>
+          <Typography variant="h3" fontWeight={700}>
             Seller Dashboard
           </Typography>
-          <Typography variant=\"body1\" color=\"text.secondary\">
+          <Typography variant="body1" color="text.secondary">
             Manage your products and track sales
           </Typography>
         </div>
         <Button
-          variant=\"contained\"
+          variant="contained"
           startIcon={<AddIcon />}
-          size=\"large\"
+          size="large"
           onClick={() => setOpenAddProduct(true)}
           sx={{
             background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -78,10 +78,10 @@ export default function SellerDashboard() {
               transition={{ delay: index * 0.1 }}
             >
               <Paper sx={{ p: 3, borderLeft: 4, borderColor: stat.color }}>
-                <Typography variant=\"h4\" fontWeight={700} color={stat.color}>
+                <Typography variant="h4" fontWeight={700} color={stat.color}>
                   {stat.value}
                 </Typography>
-                <Typography variant=\"body2\" color=\"text.secondary\">
+                <Typography variant="body2" color="text.secondary">
                   {stat.label}
                 </Typography>
               </Paper>
@@ -92,7 +92,7 @@ export default function SellerDashboard() {
 
       {/* Products Table */}
       <Paper sx={{ p: 3, borderRadius: 3 }}>
-        <Typography variant=\"h5\" fontWeight={600} gutterBottom>
+        <Typography variant="h5" fontWeight={600} gutterBottom>
           My Products
         </Typography>
         <TableContainer>
@@ -104,7 +104,7 @@ export default function SellerDashboard() {
                 <TableCell><strong>Stock</strong></TableCell>
                 <TableCell><strong>Sales</strong></TableCell>
                 <TableCell><strong>Status</strong></TableCell>
-                <TableCell align=\"right\"><strong>Actions</strong></TableCell>
+                <TableCell align="right"><strong>Actions</strong></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -118,17 +118,17 @@ export default function SellerDashboard() {
                     <Chip
                       label={product.status}
                       color={product.status === 'Active' ? 'success' : 'error'}
-                      size=\"small\"
+                      size="small"
                     />
                   </TableCell>
-                  <TableCell align=\"right\">
-                    <IconButton size=\"small\">
+                  <TableCell align="right">
+                    <IconButton size="small">
                       <VisibilityIcon />
                     </IconButton>
-                    <IconButton size=\"small\">
+                    <IconButton size="small">
                       <EditIcon />
                     </IconButton>
-                    <IconButton size=\"small\" color=\"error\">
+                    <IconButton size="small" color="error">
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -140,29 +140,29 @@ export default function SellerDashboard() {
       </Paper>
 
       {/* Add Product Dialog */}
-      <Dialog open={openAddProduct} onClose={() => setOpenAddProduct(false)} maxWidth=\"md\" fullWidth>
+      <Dialog open={openAddProduct} onClose={() => setOpenAddProduct(false)} maxWidth="md" fullWidth>
         <DialogTitle>Add New Product</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
             <Grid item xs={12}>
-              <TextField fullWidth label=\"Product Name\" />
+              <TextField fullWidth label="Product Name" />
             </Grid>
             <Grid item xs={12}>
-              <TextField fullWidth multiline rows={4} label=\"Description\" />
+              <TextField fullWidth multiline rows={4} label="Description" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label=\"Price\" type=\"number\" />
+              <TextField fullWidth label="Price" type="number" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label=\"Stock Quantity\" type=\"number\" />
+              <TextField fullWidth label="Stock Quantity" type="number" />
             </Grid>
             <Grid item xs={12}>
               <FormControl fullWidth>
                 <InputLabel>Category</InputLabel>
-                <Select label=\"Category\">
-                  <MenuItem value=\"electronics\">Electronics</MenuItem>
-                  <MenuItem value=\"fashion\">Fashion</MenuItem>
-                  <MenuItem value=\"home\">Home & Garden</MenuItem>
+                <Select label="Category">
+                  <MenuItem value="electronics">Electronics</MenuItem>
+                  <MenuItem value="fashion">Fashion</MenuItem>
+                  <MenuItem value="home">Home & Garden</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -170,7 +170,7 @@ export default function SellerDashboard() {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenAddProduct(false)}>Cancel</Button>
-          <Button variant=\"contained\" onClick={() => setOpenAddProduct(false)}>
+          <Button variant="contained" onClick={() => setOpenAddProduct(false)}>
             Add Product
           </Button>
         </DialogActions>
