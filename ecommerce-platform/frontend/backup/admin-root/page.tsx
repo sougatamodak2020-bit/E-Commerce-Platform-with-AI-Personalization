@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -8,6 +8,9 @@ import {
   TrendingUp, Bell, LogOut, Menu, X, ChevronDown
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { motion } from 'framer-motion';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const stats = [
   { label: 'Total Revenue', value: '$125,430', change: '+12.5%', icon: DollarSign, color: 'from-emerald-500 to-teal-500' },
