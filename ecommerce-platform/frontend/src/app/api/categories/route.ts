@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 
 export async function GET(request: NextRequest) {
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     if (error) throw error;
 
     // Build tree structure
-    const buildTree = (items: any[], parentId: string | null = null) => {
+    const buildTree = (items: any[], parentId: string | null = null): any[] => {
       return items
         .filter(item => item.parent_id === parentId)
         .map(item => ({
