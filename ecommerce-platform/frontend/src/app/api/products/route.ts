@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     const {
       name,
       description,
@@ -22,18 +22,24 @@ export async function POST(request: NextRequest) {
 
     // Validation
     if (!name || !description || !price || !category || !sku) {
-      return NextResponse.json({
-        success: false,
-        error: {
-          code: 'VALIDATION_ERROR',
-          message: 'Missing required fields',
-          statusCode: 400,
+      return NextResponse.json(
+        {
+          success: false,
+          error: {
+            code: 'VALIDATION_ERROR',
+            message: 'Missing required fields',
+            statusCode: 400,
+          },
         },
-      }, { status: 400 });
+        { status: 400 }
+      );
     }
 
     // Create slug
-    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const slug = name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
 
     // Get category ID
     const { data: categoryData, error: categoryError } = await supabase
@@ -43,14 +49,17 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (categoryError || !categoryData) {
-      return NextResponse.json({
-        success: false,
-        error: {
-          code: 'INVALID_CATEGORY',
-          message: 'Category not found',
-          statusCode: 400,
+      return NextResponse.json(
+        {
+          success: false,
+          error: {
+            code: 'INVALID_CATEGORY',
+            message: 'Category not found',
+            statusCode: 400,
+          },
         },
-      }, { status: 400 });
+        { status: 400 }
+      );
     }
 
     const { data, error } = await supabase
@@ -76,21 +85,26 @@ export async function POST(request: NextRequest) {
 
     if (error) throw error;
 
-    return NextResponse.json({
-      success: true,
-      data,
-      message: 'Product created successfully',
-    }, { status: 201 });
-
+    return NextResponse.json(
+      {
+        success: true,
+        data,
+        message: 'Product created successfully',
+      },
+      { status: 201 }
+    );
   } catch (error: any) {
     console.error('Create Product Error:', error);
-    return NextResponse.json({
-      success: false,
-      error: {
-        code: 'CREATE_ERROR',
-        message: error.message || 'Failed to create product',
-        statusCode: 500,
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: 'CREATE_ERROR',
+          message: error.message || 'Failed to create product',
+          statusCode: 500,
+        },
       },
-    }, { status: 500 });
+      { status: 500 }
+    );
   }
 }

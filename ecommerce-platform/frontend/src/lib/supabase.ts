@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -8,7 +7,8 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Client-side client (for components)
-export const createBrowserClient = () => createClientComponentClient();
+export const createBrowserClient = () =>
+  createClient(supabaseUrl, supabaseAnonKey);
 
 // Database types
 export interface Database {
@@ -26,7 +26,10 @@ export interface Database {
           created_at: string;
           updated_at: string;
         };
-        Insert: Omit<Database['public']['Tables']['users']['Row'], 'id' | 'created_at' | 'updated_at'>;
+        Insert: Omit<
+          Database['public']['Tables']['users']['Row'],
+          'id' | 'created_at' | 'updated_at'
+        >;
         Update: Partial<Database['public']['Tables']['users']['Insert']>;
       };
       products: {
@@ -54,7 +57,16 @@ export interface Database {
           created_at: string;
           updated_at: string;
         };
-        Insert: Omit<Database['public']['Tables']['products']['Row'], 'id' | 'created_at' | 'updated_at' | 'rating' | 'review_count' | 'view_count' | 'purchase_count'>;
+        Insert: Omit<
+          Database['public']['Tables']['products']['Row'],
+          | 'id'
+          | 'created_at'
+          | 'updated_at'
+          | 'rating'
+          | 'review_count'
+          | 'view_count'
+          | 'purchase_count'
+        >;
         Update: Partial<Database['public']['Tables']['products']['Insert']>;
       };
       orders: {
@@ -68,7 +80,13 @@ export interface Database {
           shipping: number;
           discount: number;
           total: number;
-          status: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+          status:
+            | 'pending'
+            | 'confirmed'
+            | 'processing'
+            | 'shipped'
+            | 'delivered'
+            | 'cancelled';
           payment_status: 'pending' | 'paid' | 'failed' | 'refunded';
           payment_method: string;
           shipping_address: Record<string, any>;
@@ -78,7 +96,10 @@ export interface Database {
           created_at: string;
           updated_at: string;
         };
-        Insert: Omit<Database['public']['Tables']['orders']['Row'], 'id' | 'order_number' | 'created_at' | 'updated_at'>;
+        Insert: Omit<
+          Database['public']['Tables']['orders']['Row'],
+          'id' | 'order_number' | 'created_at' | 'updated_at'
+        >;
         Update: Partial<Database['public']['Tables']['orders']['Insert']>;
       };
       categories: {
@@ -93,7 +114,10 @@ export interface Database {
           sort_order: number;
           created_at: string;
         };
-        Insert: Omit<Database['public']['Tables']['categories']['Row'], 'id' | 'created_at'>;
+        Insert: Omit<
+          Database['public']['Tables']['categories']['Row'],
+          'id' | 'created_at'
+        >;
         Update: Partial<Database['public']['Tables']['categories']['Insert']>;
       };
       reviews: {
@@ -109,7 +133,10 @@ export interface Database {
           is_verified: boolean;
           created_at: string;
         };
-        Insert: Omit<Database['public']['Tables']['reviews']['Row'], 'id' | 'created_at' | 'helpful_count'>;
+        Insert: Omit<
+          Database['public']['Tables']['reviews']['Row'],
+          'id' | 'created_at' | 'helpful_count'
+        >;
         Update: Partial<Database['public']['Tables']['reviews']['Insert']>;
       };
     };
@@ -118,7 +145,6 @@ export interface Database {
 
 // Helper functions
 export const dbHelpers = {
-  // Products
   async getProducts(options?: {
     limit?: number;
     offset?: number;
@@ -154,29 +180,29 @@ export const dbHelpers = {
       query = query.limit(options.limit);
     }
     if (options?.offset) {
-      query = query.range(options.offset, options.offset + (options.limit || 10) - 1);
+      query = query.range(
+        options.offset,
+        options.offset + (options.limit || 10) - 1
+      );
     }
 
     return query;
   },
 
   async getProduct(id: string) {
-    return supabase
-      .from('products')
-      .select('*')
-      .eq('id', id)
-      .single();
+    return supabase.from('products').select('*').eq('id', id).single();
   },
 
-  async createProduct(product: Database['public']['Tables']['products']['Insert']) {
-    return supabase
-      .from('products')
-      .insert(product)
-      .select()
-      .single();
+  async createProduct(
+    product: Database['public']['Tables']['products']['Insert']
+  ) {
+    return supabase.from('products').insert(product).select().single();
   },
 
-  async updateProduct(id: string, updates: Database['public']['Tables']['products']['Update']) {
+  async updateProduct(
+    id: string,
+    updates: Database['public']['Tables']['products']['Update']
+  ) {
     return supabase
       .from('products')
       .update(updates)
@@ -186,19 +212,13 @@ export const dbHelpers = {
   },
 
   async deleteProduct(id: string) {
-    return supabase
-      .from('products')
-      .delete()
-      .eq('id', id);
+    return supabase.from('products').delete().eq('id', id);
   },
 
-  // Orders
-  async createOrder(order: Database['public']['Tables']['orders']['Insert']) {
-    return supabase
-      .from('orders')
-      .insert(order)
-      .select()
-      .single();
+  async createOrder(
+    order: Database['public']['Tables']['orders']['Insert']
+  ) {
+    return supabase.from('orders').insert(order).select().single();
   },
 
   async getOrders(userId?: string) {
@@ -223,7 +243,6 @@ export const dbHelpers = {
       .single();
   },
 
-  // Categories
   async getCategories() {
     return supabase
       .from('categories')
@@ -232,7 +251,6 @@ export const dbHelpers = {
       .order('sort_order');
   },
 
-  // Reviews
   async getProductReviews(productId: string) {
     return supabase
       .from('reviews')
@@ -241,15 +259,12 @@ export const dbHelpers = {
       .order('created_at', { ascending: false });
   },
 
-  async createReview(review: Database['public']['Tables']['reviews']['Insert']) {
-    return supabase
-      .from('reviews')
-      .insert(review)
-      .select()
-      .single();
+  async createReview(
+    review: Database['public']['Tables']['reviews']['Insert']
+  ) {
+    return supabase.from('reviews').insert(review).select().single();
   },
 
-  // Upload image
   async uploadImage(file: File, bucket: string = 'products') {
     const fileName = `${Date.now()}-${file.name}`;
     const { data, error } = await supabase.storage
