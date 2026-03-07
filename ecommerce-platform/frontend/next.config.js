@@ -1,12 +1,10 @@
-﻿/** @type {import("next").NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: false,
   },
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "**.unsplash.com" },
@@ -19,5 +17,16 @@ const nextConfig = {
       { protocol: "https", hostname: "avatars.githubusercontent.com" },
     ],
   },
+  experimental: {
+    optimizePackageImports: [
+      "@mui/icons-material",
+      "@mui/material",
+      "lodash",
+      "date-fns",
+      "lucide-react",
+      "recharts",
+    ],
+  },
 };
+
 module.exports = nextConfig;
