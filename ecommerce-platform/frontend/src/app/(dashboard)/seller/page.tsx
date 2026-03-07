@@ -27,6 +27,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { motion } from 'framer-motion';
 
 export default function SellerDashboard() {
   const [openAddProduct, setOpenAddProduct] = useState(false);
