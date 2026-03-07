@@ -15,7 +15,7 @@ export default function Hero3DScene() {
       vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
       r: Math.random() * 2 + 0.5,
     }));
-    let id;
+    let id: number;
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       pts.forEach(p => {
